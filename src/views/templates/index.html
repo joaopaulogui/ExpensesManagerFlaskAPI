@@ -1,0 +1,122 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="https://code.jquery.com/ui/1.14.1/themes/base/jquery-ui.css">
+    <title>Expense Manager</title>
+</head>
+<body>
+    <script src="https://code.jquery.com/jquery-3.7.1.js"></script>
+    <script src="https://code.jquery.com/ui/1.14.1/jquery-ui.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.7/dist/js/bootstrap.bundle.min.js" integrity="sha384-ndDqU0Gzau9qJ1lfW4pNLlhNTkCfHzAVBReH9diLvGRem5+R9g2FzA8ZGN954O5Q" crossorigin="anonymous"></script>
+    <script>
+        $( function() {
+            $('#datepicker').datepicker({
+                dateFormat: "dd/mm/yy",
+                onSelect: function () {
+                    document.getElementById('myForm').submit();
+                }
+            });
+        });
+    </script>
+
+    <div class="row justify-content-center">
+        <h1>Expense Manager</h1>
+    </div>
+
+    <br>
+    
+    <form class="row justify-content-center" id="myForm" method="post">
+        <input class="form-control" type="text" placeholder="Select Date" id="datepicker" style="width: 10%; text-align: center;" name="date" value="{{ selected_date }}">
+    </form>
+
+    <br>
+    
+    <div class="row justify-content-center">
+        <h3>Expenses</h3>
+    </div>
+
+    <div>
+        <table class="table table-striped">
+            <thead>
+                <tr>
+                <th scope="col">#</th>
+                <th scope="col">Description</th>
+                <th scope="col">Type</th>
+                <th scope="col">Cost</th>
+                </tr>
+            </thead>
+            <tbody>
+                {% for i in range(expenses | length) %}
+                    <tr>
+                    <th scope="row">{{ i+1 }}</th>
+                    <td>{{ expenses[i]["description"]  }}</td>
+                    <td>{{ expenses[i]["type"] }}</td>
+                    <td>{{ expenses[i]["cost"] }}</td>
+                    </tr>
+                {% endfor %}
+                </tr>
+                <tr>
+                <th scope="row"></th>
+                <td></td>
+                <td>Total</td>
+                <td>{{ total }}</td>
+                </tr>
+            </tbody>
+        </table>
+    </div>
+
+    {% for key in divided_total %}
+        <div class="row justify-content-center">
+            {{ key }}
+        </div>
+
+        <div class="row justify-content-center">
+            <div class="progress" role="progressbar" aria-label="Example with label" aria-valuenow="{{ divided_total[key] }}" aria-valuemin="0" aria-valuemax="100" style="width: 50%">
+                <div class="progress-bar" style="width: {{ divided_total[key] }}%">{{ divided_total[key] | round(precision=2) }}%</div>
+            </div>
+        </div>
+    {% endfor %}
+
+    <br>
+    <h3>New Expense</h3>
+    <form action="" method="POST" onsubmit="this.submit(); this.reset(); return false;">
+        {{ form.hidden_tag() }}
+        <div class="row">
+            <div class="col">
+                {{ form.description(type="text", class="form-control", 
+                    id="description", placeholder="Description") }}
+                {%if form.errors.description %}
+                    <div class="alert alert-danger" role="alert">
+                            {{ form.errors.description }}
+                    </div>
+                {% endif %}
+            </div>
+            <div class="col">
+                {{ form.type(type="text", class="form-control", 
+                    id="type", placeholder="Type") }}
+                {%if form.errors.type %}
+                    <div class="alert alert-danger" role="alert">
+                            {{ form.errors.rype }}
+                    </div>
+                {% endif %}
+            </div>
+            <div class="col">
+                {{ form.cost(type="number", class="form-control", 
+                    id="cost", placeholder="Cost", min="0", step="0.01") }}
+                {%if form.errors.cost %}
+                    <div class="alert alert-danger" role="alert">
+                            {{ form.errors.cost }}
+                    </div>
+                {% endif %}
+            </div>
+        </div>
+        <br>
+        <div class="d-grid d-md-flex justify-content-md-end">
+            <button class="btn btn-primary" name="submit_expense" type="submit">Add Expense</button>
+        </div>
+    </form>
+</body>
+</html>
