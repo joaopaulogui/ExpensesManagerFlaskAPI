@@ -1,0 +1,5 @@
+# Pastas de cache
+__pycache__/
+*.pyc
+__pytest_cache__/
+.vscode/
