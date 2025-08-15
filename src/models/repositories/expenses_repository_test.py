@@ -15,4 +15,4 @@ def test_repository_expense():
     print(response)
 
     for expense in response:
-        expenses_repository.delete_expense(expense.id)
+        expenses_repository.delete_expense(expense.id) 
