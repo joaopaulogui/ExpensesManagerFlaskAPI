@@ -5,8 +5,8 @@ class DBConnectionHandler:
     def __init__(self) -> None:
         self.__connection_string = "{}://{}:{}@{}:{}/{}".format(
             "mysql+pymysql",
-            "newRoot",
-            "passwww",
+            "root",
+            "password",
             "localhost",
             "3306",
             "expense_manager"
