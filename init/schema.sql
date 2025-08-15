@@ -1,0 +1,11 @@
+CREATE DATABASE IF NOT EXISTS expense_manager;
+
+USE expense_manager;
+
+CREATE TABLE IF NOT EXISTS expenses (
+	id BIGINT NOT NULL AUTO_INCREMENT PRIMARY KEY,
+    description VARCHAR(50) NOT NULL,
+    type VARCHAR(50) NOT NULL,
+    date DATE NOT NULL,
+    cost INT NOT NULL
+);
