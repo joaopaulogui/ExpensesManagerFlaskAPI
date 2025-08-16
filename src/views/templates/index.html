@@ -82,7 +82,7 @@
 
     <br>
     <h3>New Expense</h3>
-    <form action="" method="POST" onsubmit="this.submit(); this.reset(); return false;">
+    <form method="POST" onsubmit="this.submit(); this.reset(); return false;">
         {{ form.hidden_tag() }}
         <div class="row">
             <div class="col">
@@ -115,7 +115,7 @@
         </div>
         <br>
         <div class="d-grid d-md-flex justify-content-md-end">
-            <button class="btn btn-primary" name="submit_expense" type="submit">Add Expense</button>
+            <button class="btn btn-primary" type="submit" name="submit_expense">Add Expense</button>
         </div>
     </form>
 </body>
