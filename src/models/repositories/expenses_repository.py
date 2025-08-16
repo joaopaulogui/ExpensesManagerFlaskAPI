@@ -8,7 +8,7 @@ class ExpensesRepository:
     def insert_expense(cls, description: str, type: str, date: str, cost: int) -> ExpenseEntity:
         with DBConnectionHandler() as database:
             try:
-                new_registry = ExpenseEntity(description, type, date, cost)
+                new_registry = ExpenseEntity(description, type, date, cost*100)
                 database.session.add(new_registry)
                 database.session.commit()
                 return new_registry
