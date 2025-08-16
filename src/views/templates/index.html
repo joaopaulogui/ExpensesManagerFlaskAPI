@@ -54,7 +54,7 @@
                     <th scope="row">{{ i+1 }}</th>
                     <td>{{ expenses[i]["description"]  }}</td>
                     <td>{{ expenses[i]["type"] }}</td>
-                    <td>{{ expenses[i]["cost"] }}</td>
+                    <td>{{ expenses[i]["cost"]/100 }}</td>
                     </tr>
                 {% endfor %}
                 </tr>
@@ -62,7 +62,7 @@
                 <th scope="row"></th>
                 <td></td>
                 <td>Total</td>
-                <td>{{ total }}</td>
+                <td>{{ total/100 }}</td>
                 </tr>
             </tbody>
         </table>
